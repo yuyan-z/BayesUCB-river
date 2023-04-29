@@ -1,3 +1,6 @@
+'''
+This file is a test file, to give an example of the use of our BayesUCB class.
+'''
 import matplotlib.pyplot as plt
 from BayesUCB import BayesUCB
 from river import stats

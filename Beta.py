@@ -3,7 +3,11 @@ from scipy.special import btdtri
 
 class Beta:
     """
-    posterior of Bernoulli/Beta distribution.
+    Computes the posterior of Bernoulli/Beta distribution.
+
+    Parameters :
+    a,b
+        Shape parameters of the Beta distribution 
     """
 
     def __init__(self, a=1, b=1):
