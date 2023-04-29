@@ -27,4 +27,6 @@ if __name__ == '__main__':
     print('Sum:', metric.get())
     plt.figure()
     plt.plot(hist_metrics)
+    plt.xlabel("Time")
+    plt.ylabel("Score")
     plt.show()
