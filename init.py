@@ -1,42 +1,32 @@
-import random
-import numpy as np
-import pandas as pd
+'''
+This file is a test file, to give an example of the use of our BayesUCB class.
+'''
 import matplotlib.pyplot as plt
-
-from Arm import Arm
 from BayesUCB import BayesUCB
-from Environment import Environment
-from Result import Result
-from Evaluation import Evaluation
-from Beta import Beta
-dataset = pd.read_csv('./ucb-data.csv')
-arms = [Arm(dataset, i) for i in range(0,8)]
-env = Environment(arms)
+from river import stats
+import gym
+if __name__ == '__main__':
+    env = gym.make('river_bandits/CandyCaneContest-v0')
+    _ = env.reset(seed=42)
+    _ = env.action_space.seed(123)
 
-scenario = 10
-nbRep = 10
-horizon = 1800
+    policy = BayesUCB(n_arms=env.action_space.n)
 
-K = env.n_arms
+    metric = stats.Sum()
+    hist_metrics = []
+    while True:
+        action = next(policy.pull(range(env.action_space.n)))
+        observation, reward, terminated, truncated, info = env.step(action)
+        policy = policy.update(action, reward)
+        policy.getReward(action, reward)
+        metric = metric.update(reward)
+        hist_metrics.append(metric.get())
+        if terminated or truncated:
+            break
 
-policy = BayesUCB(K)
-
-
-# tsav = int_(linspace(100,horizon-1,200))
-tsav = np.linspace(100,horizon-1,200).round().astype(int)
-
-# print(f"tsav:{tsav}")
-
-k=0
-
-ev = Evaluation(env, policy, nbRep, horizon, tsav)
-print(f'mean reward:{ev.meanReward()}')
-# print(f'meanNbDraws():{ev.meanNbDraws()}')
-mean_regret = ev.meanRegret()
-print(f'mean regret:{mean_regret[-1]}')
-
-plt.semilogx(1+tsav, mean_regret)
-plt.xlabel('Time')
-plt.ylabel('Mean Regret')
-
-plt.show()
+    print('Sum:', metric.get())
+    plt.figure()
+    plt.plot(hist_metrics)
+    plt.xlabel("Time")
+    plt.ylabel("Score")
+    plt.show()
