@@ -5,22 +5,6 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == '__main__':
-    # env = gym.make('river_bandits/CandyCaneContest-v0')
-    # _ = env.reset(seed=42)
-    # _ = env.action_space.seed(123)
-    #
-    # policy = BayesUCB(seed=123)
-    #
-    # metric = stats.Sum()
-    # while True:
-    #     action = policy.pull(range(env.action_space.n))
-    #     observation, reward, terminated, truncated, info = env.step(action)
-    #     policy = policy.update(action, reward)
-    #     metric = metric.update(reward)
-    #     if terminated or truncated:
-    #         break
-
-
     env = gym.make('river_bandits/CandyCaneContest-v0')
     _ = env.reset(seed=42)
     _ = env.action_space.seed(123)
