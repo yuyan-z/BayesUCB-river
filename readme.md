@@ -4,5 +4,5 @@ This work could be extended to include other distributions, such as the Gaussian
 The "init.py" file is there to serve as an example of how to use the Bayes UCB class.
 
 # References
-"On Bayesian Upper Confidence Bounds for Bandit Problems", Emilie Kaufmann, 2012.
+[1] Kaufmann, Emilie, Olivier Cappé, and Aurélien Garivier. "On Bayesian upper confidence bounds for bandit problems." Artificial intelligence and statistics. PMLR, 2012.
 
