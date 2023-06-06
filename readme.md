@@ -8,7 +8,8 @@ We chose to use a Bernouilli distribution when computing the posterior distribut
 
 - test.py
 
-It evaluates the performance of the BayesUCB policy defined, and compares the existing bandit algorithms in the River.
+It evaluates the performance of the BayesUCB policy defined, and compares the existing bandit algorithms in the River. The result is shown in the figure below:
+![Image text]([https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg](https://github.com/ormarv/Project/blob/1f832165dbd16a80c890fb8c3b2437ff1e8d6abb/result.png))
 
 - /previous_version
 
