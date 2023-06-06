@@ -76,7 +76,7 @@ class BayesUCB(bandit.base.Policy):
         return self._rng.choice(best_arms)
 
     def compute_index(self, arm_id):
-        """the p-th quantile of the beta distribution for the arm"""
+        """Compute the p-th quantile of the beta distribution for the arm as its confidence index"""
         p = 1 - 1 / (self._n + 1)
         posterior = self._posteriors[arm_id]
         return scipy.special.btdtri(posterior.alpha, posterior.beta, p)
