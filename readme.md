@@ -7,6 +7,7 @@ It implements the BayesUCB algorithm<sup>[1]</sup> for the multi-armed bandit pr
 We chose to use a Bernouilli distribution when computing the posterior distribution and the upper confidence bound (UCB) on the expected reward of each arm. The arm with the highest UCB is then pulled. And the posterior’s distribution is updated after each pull.
 
 - /previous_version/
+
 Our current code has been accepted by Max via [Pull requests](https://github.com/yuyan2000/river/blob/main/river/bandit/bayes_ucb.py) to the River. The previous versions are also available at /previous_version/
 
 
