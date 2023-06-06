@@ -8,7 +8,6 @@ from river import proba
 from scipy import special
 
 
-
 class BayesUCB(bandit.base.Policy):
     """Bayes-UCB bandit policy.
 
@@ -22,33 +21,28 @@ class BayesUCB(bandit.base.Policy):
 
     Examples
     --------
-    
     >>> env = gym.make('river_bandits/CandyCaneContest-v0')
-
     >>> _ = env.reset(seed=42)
     >>> _ = env.action_space.seed(123)
 
     >>> policy = BayesUCB(n_arms=env.action_space.n)
 
     >>> metric = stats.Sum()  # cumulative reward
-
     >>> while True:
-    ...    action = next(policy.pull(range(env.action_space.n)))
-    ...    observation, reward, terminated, truncated, info = env.step(action)
-    ...    policy = policy.update(action, reward)
-    ...    policy.get_reward(action, reward)
-    ...    metric = metric.update(reward)
-    ...    if terminated or truncated:
-    ...        break
+    ...     action = next(policy.pull(range(env.action_space.n)))
+    ...     observation, reward, terminated, truncated, info = env.step(action)
+    ...     policy = policy.update(action, reward)
+    ...     metric = metric.update(reward)
+    ...     if terminated or truncated:
+    ...         break
 
     >>> metric
-    Sum: 824.
+    Sum: 842.
 
     Reference
     --------
     [^1]: [Kaufmann, Emilie, Olivier Cappé, and Aurélien Garivier. "On Bayesian upper confidence bounds for bandit problems." Artificial intelligence and statistics. PMLR, 2012.](http://proceedings.mlr.press/v22/kaufmann12/kaufmann12.pdf)
     """
-
 
     def __init__(self, n_arms: int, reward_obj=None, burn_in=0):
         super().__init__(reward_obj, burn_in)
@@ -57,28 +51,23 @@ class BayesUCB(bandit.base.Policy):
         for arm_id in range(self.n_arms):
             self.posterior[arm_id] = proba.Beta()
 
-
     def _pull(self, arm_ids):
         indices = {}
 
         for arm_id in arm_ids:
-            index[arm_id] = self.compute_index(arm_id)
-        max_index = max(index.values())
+            indices[arm_id] = self.compute_index(arm_id)
+        max_index = max(indices.values())
+        best_arms = [arm for arm in indices if indices[arm] == max_index]
 
-        best_arms = [arm for arm in index if index[arm] == max_index]
-
-        return random.choice(bestArms)
+        return random.choice(best_arms)
 
     def compute_index(self, arm_id):
-        """the p-th quantile of the beta distribution for the arm
-        """
+        """the p-th quantile of the beta distribution for the arm"""
         p = 1 - 1. / (self._n + 1)
         return special.btdtri(self.posterior[arm_id].alpha, self.posterior[arm_id].beta, p)
 
-
     def update(self, arm_id, *reward_args, **reward_kwargs):
-        """Rewrite update function
-        """
+        """Rewrite update function"""
         self._rewards[arm_id].update(*reward_args, **reward_kwargs)
         self._counts[arm_id] += 1
         self._n += 1
