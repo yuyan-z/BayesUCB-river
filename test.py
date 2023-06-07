@@ -58,10 +58,6 @@ if __name__ == '__main__':
         bandit.ThompsonSampling(dist=proba.Beta(), seed=101),
     ]
 
-    env = gym.make('river_bandits/CandyCaneContest-v0', max_episode_steps=1000)
-
-    n_episodes = 10
-
     policy_names = {
         0: 'BayesUCB',
         1: 'EpsilonGreedy',
@@ -76,19 +72,38 @@ if __name__ == '__main__':
         'ThompsonSampling': 'tab:orange'
     }
 
-    trace_sum = test(policies, env, n_episodes, "sum reward")
-    trace_mean = test(policies, env, n_episodes, "mean reward")
+    env = gym.make('river_bandits/CandyCaneContest-v0', max_episode_steps=1000)
 
-    # example
-    print(trace_sum.sample(5, random_state=42))
+    trace_sum = bandit.evaluate(
+        policies=policies,
+        env=env,
+        reward_stat=stats.Sum(),
+        pull_func=pull_func,
+        n_episodes=10,
+        seed=42
+    )
+    trace_sum = pd.DataFrame(trace_sum)
+    print(trace_sum.sample(5, random_state=42))  # example
 
+    trace_mean = bandit.evaluate(
+        policies=policies,
+        env=env,
+        reward_stat=stats.Mean(),
+        pull_func=pull_func,
+        n_episodes=10,
+    )
+    trace_mean = pd.DataFrame(trace_mean)
+    print(trace_mean.sample(5, random_state=42))  # example
+
+
+    # plot
     fig, axes = plt.subplots(nrows=1, ncols=2)
 
     (
         trace_sum
             .assign(policy=trace_sum.policy_idx.map(policy_names))
             .groupby(['step', 'policy'])
-        ["sum reward"].mean()
+        ["reward_stat"].mean()
             .unstack()
             .plot(ax=axes[0], color=colors)
     )
@@ -97,11 +112,13 @@ if __name__ == '__main__':
         trace_mean
             .assign(policy=trace_mean.policy_idx.map(policy_names))
             .groupby(['step', 'policy'])
-        ["mean reward"].mean()
+        ["reward_stat"].mean()
             .unstack()
             .plot(ax=axes[1], color=colors)
     )
 
     axes[0].set_ylabel('sum reward')
     axes[1].set_ylabel('mean reward')
+
     plt.show()
+    
