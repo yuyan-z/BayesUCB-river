@@ -15,7 +15,7 @@ It evaluates the performance of the BayesUCB policy defined, and compares it wit
 
 - /previous_version
 
-Our current code has been accepted by Max via [Pull requests](https://github.com/online-ml/river/pull/1237) to the River. The previous versions are also available at /previous_version
+Our current code has been reorganized by Max via [Pull requests](https://github.com/online-ml/river/pull/1237) to the River. The previous versions are also available at /previous_version
 
 
 
