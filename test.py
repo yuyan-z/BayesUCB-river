@@ -14,7 +14,7 @@ def pull_func(policy, env):
     return next(policy.pull(range(env.action_space.n)))
 
 
-def test(policies, env, n_episodes, metrictype, policy_names, colors):
+def test(policies, env, n_episodes, metrictype):
     trace = []
 
     for policy_idx, policy in enumerate(policies):
@@ -48,21 +48,7 @@ def test(policies, env, n_episodes, metrictype, policy_names, colors):
                     break
 
     trace_df = pd.DataFrame(trace)
-
-    # example
-    print(trace_df.sample(5, random_state=42))
-
-    (
-        trace_df
-            .assign(policy=trace_df.policy_idx.map(policy_names))
-            .groupby(['step', 'policy'])
-        [metrictype].mean()
-            .unstack()
-            .plot(color=colors)
-    )
-    plt.ylabel(metrictype)
-    plt.show()
-
+    return trace_df
 
 if __name__ == '__main__':
     policies = [
@@ -90,6 +76,32 @@ if __name__ == '__main__':
         'ThompsonSampling': 'tab:orange'
     }
 
-    test(policies, env, n_episodes, "sum reward", policy_names, colors)
-    # test(policies, env, n_episodes, "mean reward", policy_names, colors)
+    trace_sum = test(policies, env, n_episodes, "sum reward")
+    trace_mean = test(policies, env, n_episodes, "mean reward")
 
+    # example
+    print(trace_sum.sample(5, random_state=42))
+
+    fig, axes = plt.subplots(nrows=1, ncols=2)
+
+    (
+        trace_sum
+            .assign(policy=trace_sum.policy_idx.map(policy_names))
+            .groupby(['step', 'policy'])
+        ["sum reward"].mean()
+            .unstack()
+            .plot(ax=axes[0], color=colors)
+    )
+
+    (
+        trace_mean
+            .assign(policy=trace_mean.policy_idx.map(policy_names))
+            .groupby(['step', 'policy'])
+        ["mean reward"].mean()
+            .unstack()
+            .plot(ax=axes[1], color=colors)
+    )
+
+    axes[0].set_ylabel('sum reward')
+    axes[1].set_ylabel('mean reward')
+    plt.show()
