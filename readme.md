@@ -9,7 +9,7 @@ We chose to use a Beta distribution when computing the posterior distribution an
 - test.py
 
 It evaluates the performance of the BayesUCB policy defined, and compares it with the existing bandit algorithms in River. The result is shown in the figure below:
-![alt text](https://github.com/ormarv/Project/blob/eda48be1f579ff57e20a9d4ed57701749f192000/result.png))
+![alt text](https://github.com/ormarv/Project/blob/eda48be1f579ff57e20a9d4ed57701749f192000/result.png)
 
 
 
