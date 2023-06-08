@@ -4,7 +4,7 @@ This is the "Data Stream Mining" project of Yuyan Zhao and Bérénice Jaulmes.
 - bayes_ucb.py
 
 It implements the BayesUCB algorithm<sup>[1]</sup> for the multi-armed bandit problem with the [River](https://github.com/online-ml/river/tree/main) library. 
-We chose to use a Beta distribution when computing the posterior distribution and the upper confidence bound (UCB) on the expected reward of each arm. The arm with the highest UCB is then pulled. And the posterior’s distribution is updated after each pull.
+We chose to use a Beta distribution to compute the posterior distribution, and use the p-th quantile as the upper confidence bound (UCB) for each arm. The arm with the highest UCB is then pulled. And the posterior distribution for the pulled arm is updated.
 
 - test.py
 
