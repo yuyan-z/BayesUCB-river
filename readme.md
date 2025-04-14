@@ -15,11 +15,7 @@ It evaluates the performance of the BayesUCB policy defined, and compares it wit
 
 - /previous_version
 
-Our current code has been reorganized by Max via [Pull requests](https://github.com/online-ml/river/pull/1237) to the River. The previous versions are also available at /previous_version
-
-
-
-
+Our code has been accepted by River! You can check out the pull request [Pull requests](https://github.com/online-ml/river/pull/1237). 
 
 ## Reference
 [1] Kaufmann, Emilie, Olivier Cappé, and Aurélien Garivier. "On Bayesian upper confidence bounds for bandit problems." Artificial intelligence and statistics. PMLR, 2012.
