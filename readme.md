@@ -1,5 +1,5 @@
 This is the "Data Stream Mining" project of Yuyan Zhao and Bérénice Jaulmes.  
-Our code has been accepted by River in pull request [Pull requests](https://github.com/online-ml/river/pull/1237). 
+Our code has been accepted by River in the [pull request](https://github.com/online-ml/river/pull/1237). 
 
 ## Documentation
 - bayes_ucb.py
