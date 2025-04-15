@@ -1,4 +1,5 @@
-This is the "Data Stream Mining" project of Yuyan Zhao and Bérénice Jaulmes.
+This is the "Data Stream Mining" project of Yuyan Zhao and Bérénice Jaulmes.  
+Our code has been accepted by River in pull request [Pull requests](https://github.com/online-ml/river/pull/1237). 
 
 ## Documentation
 - bayes_ucb.py
@@ -14,8 +15,6 @@ It evaluates the performance of the BayesUCB policy defined, and compares it wit
 
 
 - /previous_version
-
-Our code has been accepted by River! You can check out the pull request [Pull requests](https://github.com/online-ml/river/pull/1237). 
 
 ## Reference
 [1] Kaufmann, Emilie, Olivier Cappé, and Aurélien Garivier. "On Bayesian upper confidence bounds for bandit problems." Artificial intelligence and statistics. PMLR, 2012.
